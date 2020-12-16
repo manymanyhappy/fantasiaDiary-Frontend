@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import format from 'date-fns/format';
 import styled from 'styled-components';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
+import { saveDiary } from '../utils/api';
+import {
+  TOKEN
+} from '../constants/index';
+
 import Header from './Hearder';
+
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -80,16 +88,31 @@ const DiaryWrapper = styled.div`
 
 const DiaryEditor = () => {
   const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
+  const userData = useSelector(state => state.login.userData);
+
+  const history = useHistory();
 
   const currentYear = format(new Date(), 'yyyy');
   const currentMonth = format(new Date(), 'MM');
   const currentDate = format(new Date(), 'd');
 
+  const userToken = localStorage.getItem(TOKEN); // token을 넘기는 방식 바꾸기
+  let contentState = editorState.getCurrentContent();
+
+  const todayDiary = {
+    creator: userData._id,
+    yearAndMonth: `${currentYear}-${currentMonth}`,
+    date: currentDate,
+    details: convertToRaw(contentState),
+    fantasia_diary: ''
+  };
+
   const onEditorStateChange = editorState => {
     setEditorState(editorState);
+  };
 
-    const contentState = editorState.getCurrentContent();
-    console.log('content State', convertToRaw(contentState));
+  const requestSave = async () => {
+    await saveDiary(todayDiary, userToken, history);
   };
 
   return (
@@ -127,7 +150,12 @@ const DiaryEditor = () => {
             // 에디터의 값이 변경될 때마다 onEditorStateChange 호출
             onEditorStateChange={onEditorStateChange}
           />
-          <button className='button'>일기장 등록하기</button>
+          <button
+            className='button'
+            onClick={requestSave}
+          >
+            일기장 등록하기
+          </button>
         </DiaryWrapper>
       </RightBlockWrapper>
     </ContentWrapper>

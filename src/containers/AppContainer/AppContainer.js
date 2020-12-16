@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import Home from '../../components/Home';
 import Entry from '../../components/Entry';
 import DiaryEditor from '../../components/DiaryEditor';
-import Calendar from '../../components/Calendar';
+import MyFantasia from '../../components/MyFantasia';
 
 const AppContainer = () => {
   // const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -22,7 +22,7 @@ const AppContainer = () => {
         <DiaryEditor />
       </Route>
       <Route path='/myFantasia'>
-        <Calendar />
+        <MyFantasia />
       </Route>
     </Switch>
   );
