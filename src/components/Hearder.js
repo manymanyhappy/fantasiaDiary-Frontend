@@ -10,11 +10,11 @@ const HeaderWrapper = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  height: 90%;
+  height: 100%;
+  width: 10%;
   position: fixed;
   left: 0;
   top: 0;
-  padding: 2.4%;
   background-color: rgba(0, 0, 0, 0.1);
 `;
 

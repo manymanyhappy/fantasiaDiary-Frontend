@@ -11,8 +11,8 @@ const ContentWrapper = styled.div`
 
 const LeftBlockWrapper = styled.div`
   display: flex;
-  height: 100vh;
-  padding: 5.2%;
+  height: 100%;
+  width: 11.1%;
 `;
 
 const RightBlockWrapper = styled.div`
