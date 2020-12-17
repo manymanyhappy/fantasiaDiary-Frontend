@@ -6,6 +6,7 @@ import Home from '../../components/Home';
 import Entry from '../../components/Entry';
 import DiaryEditor from '../../components/DiaryEditor';
 import MyFantasia from '../../components/MyFantasia';
+import Detail from '../../components/Detail';
 
 const AppContainer = () => {
   // const isLoggedIn = useSelector(state => state.login.isLoggedIn);
@@ -23,6 +24,9 @@ const AppContainer = () => {
       </Route>
       <Route path='/myFantasia'>
         <MyFantasia />
+      </Route>
+      <Route path='/abc'>
+        <Detail />
       </Route>
     </Switch>
   );

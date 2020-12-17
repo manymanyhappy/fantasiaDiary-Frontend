@@ -32,6 +32,7 @@ const LeftBlock = styled.div`
   height: 100%;
   justify-content: flex-end;
   background: rgba(0, 0, 0, 0.1);
+
   p {
     align-self: flex-end;
     font-size: 30px;

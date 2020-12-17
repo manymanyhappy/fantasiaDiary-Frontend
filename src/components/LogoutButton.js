@@ -12,7 +12,7 @@ const LogoutButtonWrapper = styled.button`
   border: none;
   outline: none;
   background: transparent;
-  padding: 10px;
+  padding: 40px;
   font-size: 40px;
 `;
 

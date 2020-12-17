@@ -14,23 +14,23 @@ import {
 
 import Header from './Hearder';
 
-
 const ContentWrapper = styled.div`
   display: flex;
-  height: 90vh;
+  height: 100vh;
 `;
 
 const LeftBlockWrapper = styled.div`
   display: flex;
-  padding: 90px;
+  height: 100%;
+  width: 11.1%;
 `;
 
 const RightBlockWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 95vh;
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const DiaryWrapper = styled.div`
