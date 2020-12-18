@@ -18,7 +18,7 @@ const ContentWrapper = styled.div`
     font-weight: bold;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    background-color: skyblue;
+    background-color: #E4D097;
     color: rgba(0, 0, 0, 0.6);
   }
 
@@ -29,8 +29,9 @@ const ContentWrapper = styled.div`
     align-items: flex-end;
     font-size: 70px;
     font-weight: bold;
-    background-color: royalblue;
-    color: rgba(0, 0, 0, 0.5);
+    background-color: #102F81;
+    border: 1px solid #ccba87;
+    color: #FCE7AA;
   }
 `;
 

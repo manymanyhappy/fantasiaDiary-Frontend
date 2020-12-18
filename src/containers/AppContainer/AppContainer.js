@@ -25,7 +25,7 @@ const AppContainer = () => {
       <Route path='/myFantasia'>
         <MyFantasia />
       </Route>
-      <Route path='/abc'>
+      <Route path='/detail/:id'>
         <Detail />
       </Route>
     </Switch>

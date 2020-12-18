@@ -11,11 +11,11 @@ const HeaderWrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   height: 100%;
-  width: 10%;
+  width: 13%;
   position: fixed;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #081752;
 `;
 
 const IconWrapper = styled.div`
