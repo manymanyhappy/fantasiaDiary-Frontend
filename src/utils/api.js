@@ -9,7 +9,8 @@ import {
 
 export const getLoggedInUserInfo = async (email, dispatch) => {
   try {
-    const response = await axios.post('http://localhost:4000/user/login', {
+    const response = await axios.post('http://localhost:4000/user/login',
+    {
       email: email
     });
 
@@ -25,11 +26,12 @@ export const getLoggedInUserInfo = async (email, dispatch) => {
   }
 };
 
-export const saveDiary = async (todayDiary, token, history) => {
+export const saveDiary = async (todayDiary, originalDiaryText, token, history) => {
   try {
     const response = await axios.post('http://localhost:4000/myfantasia/new',
     {
-      data: todayDiary
+      data: todayDiary,
+      fantasiaDiaryItem: originalDiaryText
     },
     {
       headers: {
@@ -45,6 +47,28 @@ export const saveDiary = async (todayDiary, token, history) => {
 
       history.push('/myFantasia');
     }
+  } catch (err) {
+    console.warn(err);
+  }
+};
+
+export const getThisMonthDiaryList = async (token, year, month) => {
+  try {
+    const response = await axios.get('http://localhost:4000/myfantasia',
+    {
+      params: {
+        month: month + 1,
+        year: year
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+    });
+
+    const { diaryList } = response.data;
+
+    return diaryList;
   } catch (err) {
     console.warn(err);
   }

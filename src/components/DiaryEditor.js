@@ -8,9 +8,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import { saveDiary } from '../utils/api';
-import {
-  TOKEN
-} from '../constants/index';
+import { TOKEN } from '../constants/index';
 
 import Header from './Hearder';
 
@@ -30,7 +28,7 @@ const RightBlockWrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #f0f2f5;
 `;
 
 const DiaryWrapper = styled.div`
@@ -40,7 +38,7 @@ const DiaryWrapper = styled.div`
   flex-direction: column;
   height: 900px;
   width: 50%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #081752;
   border-radius: 10px;
 
   .title_box {
@@ -50,10 +48,10 @@ const DiaryWrapper = styled.div`
     width: 90%;
     height: 60px;
     margin-bottom: 70px;
-    border-left: 3px solid rosybrown;
+    border-left: 5px solid #E4D097;
     font-size: 31px;
     letter-spacing: 2px;
-    color: rgba(0, 0, 0, 0.7);
+    color: #E4D097;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }
@@ -69,7 +67,7 @@ const DiaryWrapper = styled.div`
     padding: 20px !important;
     margin-top: 50px;
     border-radius: 10px !important;
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: #f3eddc;
   }
 
   .button {
@@ -80,9 +78,17 @@ const DiaryWrapper = styled.div`
     padding: 20px;
     width: 300px;
     border: none;
-    border-bottom: 2px solid rosybrown;
+    border-bottom: 2px solid #E4D097;
     outline: none;
     background: none;
+    border-radius: 20px;
+    color: #E4D097;
+
+    &:hover {
+      background-color: #E4D097;
+      transition: all ease 0.2s;
+      color: #081752;
+    }
   }
 `;
 
@@ -97,13 +103,15 @@ const DiaryEditor = () => {
   const currentDate = format(new Date(), 'd');
 
   const userToken = localStorage.getItem(TOKEN); // token을 넘기는 방식 바꾸기
+
   let contentState = editorState.getCurrentContent();
+  let originalDiaryText = convertToRaw(contentState);
 
   const todayDiary = {
     creator: userData._id,
     yearAndMonth: `${currentYear}-${currentMonth}`,
     date: currentDate,
-    details: convertToRaw(contentState),
+    details: JSON.stringify(convertToRaw(contentState)),
     fantasia_diary: ''
   };
 
@@ -112,7 +120,7 @@ const DiaryEditor = () => {
   };
 
   const requestSave = async () => {
-    await saveDiary(todayDiary, userToken, history);
+    await saveDiary(todayDiary, originalDiaryText, userToken, history);
   };
 
   return (
