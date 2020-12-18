@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import Header from './Hearder';
 import Calendar from './Calendar';
+import FantasiaD3Graph from './FantasiaD3Graph';
 
 const ContentWrapper = styled.div`
   display: flex;
-  height: 100vh;
+  height: 190vh;
 `;
 
 const LeftBlockWrapper = styled.div`
@@ -17,20 +18,29 @@ const LeftBlockWrapper = styled.div`
 
 const RightBlockWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #f0f2f5;
 `;
 
 const MyFantasia = () => {
+  const [ diaryList, setDiaryList ] = useState([]);
+
   return (
     <ContentWrapper>
       <LeftBlockWrapper>
         <Header />
       </LeftBlockWrapper>
       <RightBlockWrapper>
-        <Calendar />
+        <Calendar
+          list={diaryList}
+          setList={setDiaryList}
+        />
+        <FantasiaD3Graph
+          list={diaryList}
+        />
       </RightBlockWrapper>
     </ContentWrapper>
   );

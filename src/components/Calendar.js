@@ -1,4 +1,5 @@
-import React , { useState } from 'react';
+import React , { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import {
@@ -13,11 +14,14 @@ import {
   subMonths,
 } from 'date-fns';
 
+import { TOKEN } from '../constants/index';
+import { getThisMonthDiaryList } from '../utils/api';
+
 const CalendarWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 900px;
-  height: 900px;
+  width: 800px;
+  height: 800px;
   justify-content: center;
   align-items: center;
 `;
@@ -26,9 +30,9 @@ const CalendarHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 120px;
-  background-color: rgba(0, 0, 0, 0.2);
+  width: 100.3%;
+  height: 100px;
+  background-color: #081752;
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 
@@ -39,6 +43,7 @@ const CalendarHeader = styled.div`
     border: none;
     font-size: 50px;
     padding: 30px;
+    color: #E4D097;
   }
 
   .showingMonthAndYear_box {
@@ -48,6 +53,7 @@ const CalendarHeader = styled.div`
     font-size: 40px;
     width: 300px;
     height: 80px;
+    color: #E4D097;
   }
 `;
 
@@ -56,13 +62,14 @@ const CalendarBody = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #f0f2f5;
+  border: 1px solid #081752;
 
   .sevenDays_box {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 7%;
+    height: 6%;
   }
 
   .dayOfWeek_box {
@@ -72,7 +79,7 @@ const CalendarBody = styled.div`
     width: calc(100% / 7);
     font-size: 16px;
     font-weight: bold;
-    background-color: khaki;
+    background-color: #E4D097;
 
     &:first-child {
       color: red;
@@ -95,15 +102,20 @@ const CalendarBody = styled.div`
   }
 
   .date_box {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     width: calc(100% /7);
     border-radius: 50%;
     margin: 10px;
-    /* background-color: rgba(0, 0, 0, 0.1); */
     font-size: 30px;
     color: black;
+
+    &:hover {
+      background-color: #081752;
+      color: #f0f2f5;
+    }
 
     &.different_month {
       color: rgba(0, 0, 0, 0.3);
@@ -111,16 +123,42 @@ const CalendarBody = styled.div`
 
     &.same_day {
       border-radius :30%;
-      background-color: thistle;
+      background-color: #E4D097;
+
+      &:hover {
+        border-radius: 50%;
+        background-color: #081752;
+        color: #f0f2f5;
+      }
     }
   }
 `;
 
-const Calendar = () => {
+const Calendar = ({ list, setList }) => {
   const [ date, setDate ] = useState(new Date());
-  const [ seletedDate, setSeletedDate ] = useState('');
+
+  const history = useHistory();
+
+  const userToken = localStorage.getItem(TOKEN);
 
   const sevenDays = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'];
+
+  const showingYearInHeader = getYear(date);
+  const showingMonthInHeader = getMonth(date);
+  const weeksInHeaderMonth = getWeeksInMonth(date);
+
+  const dateRange = Array(7).fill(1);
+  const weekRagne = Array(weeksInHeaderMonth).fill(1);
+
+  const requestDiaryList = async (token, year, month) => {
+    const diaryList = await getThisMonthDiaryList(
+      token,
+      year,
+      month
+    );
+
+    setList(diaryList);
+  };
 
   const addMonth = () => {
     const changedDate = addMonths(date, 1);
@@ -128,7 +166,9 @@ const Calendar = () => {
     const nextYear = getYear(changedDate);
     const nextMonth = getMonth(changedDate);
 
+    setList([]);
     setDate(new Date(nextYear, nextMonth));
+    requestDiaryList(userToken, nextYear, nextMonth);
   };
 
   const minusMonth = () => {
@@ -137,14 +177,14 @@ const Calendar = () => {
     const previousYear = getYear(changedDate);
     const previousMonth = getMonth(changedDate);
 
+    setList([]);
     setDate(new Date(previousYear, previousMonth));
+    requestDiaryList(userToken, previousYear, previousMonth);
   };
 
-  const weeksInHeaderMonth = getWeeksInMonth(date);
-  const dateRange = Array(7).fill(1);
-  const weekRagne = Array(weeksInHeaderMonth).fill(1);
-  const showingYearInHeader = getYear(date);
-  const showingMonthInHeader = getMonth(date);
+  useEffect(() => {
+    requestDiaryList(userToken, showingYearInHeader, showingMonthInHeader);
+  }, []);
 
   return (
     <CalendarWrapper>
@@ -177,17 +217,40 @@ const Calendar = () => {
                   {
                     dateRange.map((date, dateIndex) => {
                       let increasingDays = nthWeek * 7 + dateIndex;
-                      let displayDate = addDays(startOfWeek(new Date(showingYearInHeader, showingMonthInHeader)), increasingDays);
-                      let currentMonth = getMonth(displayDate);
-                      let sameMonth = showingMonthInHeader === currentMonth ? '' : 'different_month';
+                      let nextDate = addDays(startOfWeek(new Date(showingYearInHeader, showingMonthInHeader)), increasingDays);
+                      let processedDate = format(nextDate, 'd');
+                      let currentMonth = getMonth(nextDate);
+                      let currentYear = getYear(nextDate);
+                      let showingDate = showingMonthInHeader === currentMonth ? `${processedDate}` : '';
+
+                      let dateDiary = list.find(item => item.date === showingDate);
+                      let dateColor = dateDiary !== undefined ? dateDiary.fantasia_diary_id.fantasia_level_color : '';
+                      // let sameMonth = showingMonthInHeader === currentMonth ? '' : 'different_month';
 
                       let todayYear = getYear(new Date());
                       let todayMonth = getMonth(new Date());
                       let todayDate = getDate(new Date());
-                      let todaySelector = format(displayDate, 'yyyy-MM-d') === format(new Date(todayYear, todayMonth, todayDate), 'yyyy-MM-d') ? 'same_day' : '';
+                      let todaySelector = format(nextDate, 'yyyy-MM-d') === format(new Date(todayYear, todayMonth, todayDate), 'yyyy-MM-d') ? 'same_day' : '';
+
                       return (
-                        <div className={`date_box ${sameMonth} ${todaySelector}`}>
-                          <span className='text'>{format(displayDate, 'd')}</span>
+                        <div
+                          className={`date_box ${todaySelector}`}
+                          style={{background: dateColor}}
+                          onClick={() => {
+                            history.push({
+                              pathname: `/detail/${dateDiary._id}`,
+                              state: {
+                                originDiary: `${dateDiary.details}`,
+                                fantasiaDiary: `${dateDiary.fantasia_diary_id.details}`,
+                                year: currentYear,
+                                month: currentMonth + 1,
+                                date: processedDate
+                              }
+                            });
+                          }}
+                          // currentMonth가 index로 나와서 index + 1 을 해줘야 this month임
+                        >
+                          <span className='text'>{showingDate}</span>
                         </div>
                       );
                     })

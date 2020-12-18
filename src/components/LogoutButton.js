@@ -11,9 +11,13 @@ const LogoutButtonWrapper = styled.button`
   display: flex;
   border: none;
   outline: none;
-  background: transparent;
-  padding: 40px;
-  font-size: 40px;
+  width: 100px;
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  background-color: #d4d6d8;
+  border-radius: 50%;
 `;
 
 const LogoutButton = () => {

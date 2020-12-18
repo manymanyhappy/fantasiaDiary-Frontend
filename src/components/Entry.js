@@ -24,7 +24,7 @@ const ContentWrapper = styled.div`
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     font-weight: bold;
-    background-color: skyblue;
+    background-color: #E4D097;
     color: rgba(0, 0, 0, 0.6);
   }
 `;
@@ -39,7 +39,12 @@ const LeftBlock = styled.div`
   top: 0;
   width: 50%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.1);
+  background: #102F81;
+
+  &:hover {
+    background-color: #f0f2f5;
+    transition: all ease 0.4s;
+  }
 `;
 
 const RightBlock = styled.div`
@@ -52,7 +57,12 @@ const RightBlock = styled.div`
   top: 0;
   width: 50%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: #102F81;
+
+  &:hover {
+    background-color: #f0f2f5;
+    transition: all ease 0.4s;
+  }
 `;
 
 const Entry = () => {
