@@ -27,6 +27,7 @@ const RightBlockWrapper = styled.div`
 
 const MyFantasia = () => {
   const [ diaryList, setDiaryList ] = useState([]);
+  const [ D3data, setD3data ] = useState([]);
 
   return (
     <ContentWrapper>
@@ -37,9 +38,10 @@ const MyFantasia = () => {
         <Calendar
           list={diaryList}
           setList={setDiaryList}
+          setD3data={setD3data}
         />
         <FantasiaD3Graph
-          list={diaryList}
+          list={D3data}
         />
       </RightBlockWrapper>
     </ContentWrapper>

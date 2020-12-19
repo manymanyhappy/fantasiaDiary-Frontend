@@ -134,7 +134,7 @@ const CalendarBody = styled.div`
   }
 `;
 
-const Calendar = ({ list, setList }) => {
+const Calendar = ({ list, setList, setD3data }) => {
   const [ date, setDate ] = useState(new Date());
 
   const history = useHistory();
@@ -157,7 +157,20 @@ const Calendar = ({ list, setList }) => {
       month
     );
 
+    let D3tempData = diaryList.map(item => {
+      const sentimentScore = item.fantasia_diary_id.sentiment_Average.toFixed(2);
+      const month = item.yearAndMonth.split('-')[1];
+      const date = item.date;
+
+      return [sentimentScore, month, date];
+    });
+
+    D3tempData = D3tempData.sort((a, b) => {
+      return a[2] - b[2];
+    });
+
     setList(diaryList);
+    setD3data(D3tempData);
   };
 
   const addMonth = () => {
