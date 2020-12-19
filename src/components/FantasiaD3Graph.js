@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { timeFormat } from 'd3-time-format';
 import {
   line,
   select,
@@ -33,7 +32,6 @@ const FantasiaD3Graph = ({ list }) => {
   const data = list.map(item => item[0]);
   const D3Domain = list.map(item => item[2]);
 
-console.log('D3Domain',D3Domain);
   const svgRef = useRef();
 
   useEffect(() => {

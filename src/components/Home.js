@@ -121,7 +121,6 @@ const Home = () => {
         <ReactTypingEffect
           text={['환상의 일기장']}
           eraseDelay={20000}
-          cursorRender={cursor => <h1>{cursor}</h1>}
           displayTextRenderer={(text, i) => {
             return (
               <>

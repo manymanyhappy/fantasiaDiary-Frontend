@@ -26,7 +26,13 @@ export const getLoggedInUserInfo = async (email, dispatch) => {
   }
 };
 
-export const saveDiary = async (todayDiary, originalDiaryText, token, history) => {
+export const saveDiary = async (
+  todayDiary,
+  originalDiaryText,
+  token,
+  history,
+  setIsLoading,
+  ) => {
   try {
     const response = await axios.post('http://localhost:4000/myfantasia/new',
     {
@@ -43,6 +49,7 @@ export const saveDiary = async (todayDiary, originalDiaryText, token, history) =
     const { result } = response.data;
 
     if (result === SUCCESS) {
+      setIsLoading(false);
       alert(SAVE_DIARY_SUCCESS_MESSAGE);
 
       history.push('/myFantasia');

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import format from 'date-fns/format';
 import styled from 'styled-components';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
@@ -29,6 +30,39 @@ const RightBlockWrapper = styled.div`
   align-items: center;
   width: 100%;
   background-color: #f0f2f5;
+
+  .loading_box {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 90%;
+    height: 100%;
+    z-index: 100;
+    background-color: #081752;
+    opacity: 80%;
+  }
+
+  .loading_indicator {
+    display: flex;
+    width: 80%;
+    height: 300px;
+    margin-left: 80px;
+    margin-top: 200px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loading_text {
+    display: flex;
+    width: 30%;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 550px;
+    font-size: 22px;
+    color: #E4D097;
+    letter-spacing: 4px;
+  }
 `;
 
 const DiaryWrapper = styled.div`
@@ -94,6 +128,7 @@ const DiaryWrapper = styled.div`
 
 const DiaryEditor = () => {
   const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
+  const [ isLoading, setIsLoading ] = useState(false);
   const userData = useSelector(state => state.login.userData);
 
   const history = useHistory();
@@ -120,7 +155,16 @@ const DiaryEditor = () => {
   };
 
   const requestSave = async () => {
-    await saveDiary(todayDiary, originalDiaryText, userToken, history);
+    setIsLoading(true);
+
+    await saveDiary(
+      todayDiary,
+      originalDiaryText,
+      userToken,
+      history,
+      setIsLoading
+      );
+
   };
 
   return (
@@ -129,6 +173,21 @@ const DiaryEditor = () => {
         <Header />
       </LeftBlockWrapper>
       <RightBlockWrapper >
+        {
+          isLoading &&
+          <div className='loading_box'>
+            <div className='loading_indicator'>
+              <PacmanLoader
+                size={100}
+                color={'#E4D097'}
+                loading={isLoading}
+              />
+            </div>
+            <div className='loading_text'>
+              <span>😇 일기를 저장하고있어요 😇 </span>
+            </div>
+          </div>
+        }
         <DiaryWrapper>
           <div className='title_box'>
             {currentYear}년 {currentMonth}월 {currentDate}일 환상의 일기장
