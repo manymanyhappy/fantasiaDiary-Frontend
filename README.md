@@ -143,8 +143,9 @@ GOOGLE_APPLICATION_CREDENTIALS='credentials/<Your JSON Filename>'
 <img src='https://drive.google.com/uc?id=1sa-uoSWYBfR1ZAzmGZE_pMGc1CD7W-DN' alt='d3graph'>
 
 </br>
-기분이 나쁜 날 쓴 일기는 다음에 봐도 그 기분이 살아나잖아요?  
-그럴 땐, 반대말로 쓰여진 환상의 일기를 보고, 어처구니없어서 웃어보시는거 어떨까요?
+기분이 나쁜 날 쓴 일기는 다음에 봐도 그 기분이 살아나잖아요?   
+그럴 땐, 반대말로 쓰여진 환상의 일기를 보고, 어처구니없어서 웃어보시는거 어떨까요?   
+
 
 ## 📆  작업기간
 
@@ -182,7 +183,7 @@ GOOGLE_APPLICATION_CREDENTIALS='credentials/<Your JSON Filename>'
 
 ## 🏆 스스로 내리는 환상의 일기장 총 평
 
-***환상의 일기장. . .~~환장~~이 될 뻔 하다.***  
+> ***환상의 일기장. . .~~환장~~이 될 뻔 하다.***  
 
 **🔥 서론**  
 
