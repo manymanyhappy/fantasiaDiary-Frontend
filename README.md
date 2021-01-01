@@ -123,8 +123,6 @@ GOOGLE_APPLICATION_CREDENTIALS='credentials/<Your JSON Filename>'
 
 <img src='https://drive.google.com/uc?id=1SbfYNx45wk2Ro0PueMIaWvpVBKdQqnSb' alt='writeDiary'>
 
-</br>
-
 방학 때, 일기 쓰기를 미루었다가 개학 전날 한 꺼번에 쓴 경험 있으시죠?  
 환상의 일기는 매일 딱 한 번 기록할 수 있습니다. 일기는 그 날의 감정에 충실해야하니깐요!
 
@@ -142,10 +140,8 @@ GOOGLE_APPLICATION_CREDENTIALS='credentials/<Your JSON Filename>'
 <img src='https://drive.google.com/uc?id=1SIsOo0aFfYiXX3DEznUUN6hSOyhzl8Z_' alt='d3graph'>
 <img src='https://drive.google.com/uc?id=1sa-uoSWYBfR1ZAzmGZE_pMGc1CD7W-DN' alt='d3graph'>
 
-</br>
 기분이 나쁜 날 쓴 일기는 다음에 봐도 그 기분이 살아나잖아요?   
 그럴 땐, 반대말로 쓰여진 환상의 일기를 보고, 어처구니없어서 웃어보시는거 어떨까요?   
-
 
 ## 📆  작업기간
 
@@ -183,7 +179,9 @@ GOOGLE_APPLICATION_CREDENTIALS='credentials/<Your JSON Filename>'
 
 ## 🏆 스스로 내리는 환상의 일기장 총 평
 
+>
 > ***환상의 일기장. . .~~환장~~이 될 뻔 하다.***  
+>
 
 **🔥 서론**  
 
