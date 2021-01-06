@@ -4,3 +4,5 @@ const ROUTES = {
   MYFANTASIA: '/myfantasia',
   NEW: '/new'
 };
+
+export { ROUTES };
