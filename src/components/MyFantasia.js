@@ -28,7 +28,7 @@ const RightBlockWrapper = styled.div`
 const MyFantasia = () => {
   const [ diaryList, setDiaryList ] = useState([]);
   const [ D3data, setD3data ] = useState([]);
-console.log('diaryList', diaryList);
+
   return (
     <ContentWrapper>
       <LeftBlockWrapper>
