@@ -167,7 +167,7 @@ const Detail = () => {
           isShowingButtonClicked &&
           <div className='originalDiary_box'>
             <div className='originalDiary_title'>
-            {showingDiaryYear}년 {showingDiaryMonth}월 {showingDiaryDate}일 현실 일기
+              {showingDiaryYear}년 {showingDiaryMonth}월 {showingDiaryDate}일 현실 일기
             </div>
             <div className='originalDiary_text'>
               <Editor

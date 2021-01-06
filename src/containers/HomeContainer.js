@@ -55,9 +55,6 @@ const TopBlock = styled.div`
     background-color: rgba(0, 0, 0, 0.4);
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
-    /* border-left: 1px solid #102f81;
-    border-right: 1px solid #102f81; */
-    /* border-top: 1px solid #102f81; */
   }
 `;
 
@@ -78,9 +75,6 @@ const BottomBlock = styled.div`
     background-color: rgba(0, 0, 0, 0.4);
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    /* border-left: 1px solid #fce7aa;
-    border-right: 1px solid #fce7aa; */
-    /* border-bottom: 1px solid #fce7aa; */
   }
 `;
 
@@ -98,7 +92,7 @@ const TypingWrapper = styled.div`
   letter-spacing: 20px;
 `;
 
-const Home = () => {
+const HomeContainer = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -124,18 +118,18 @@ const Home = () => {
           displayTextRenderer={(text, i) => {
             return (
               <>
-              {
-                text.split('').map((char, i) => {
-                  const key = `${i}`;
+                {
+                  text.split('').map((char, i) => {
+                    const key = `${i}`;
 
-                  return (
-                    <span
-                      key={key}
-                      style={i > 3 ? { color: '#a60711'} : {}}
-                    >{char}</span>
-                  );
-                })
-              }
+                    return (
+                      <span
+                        key={key}
+                        style={i > 3 ? { color: '#a60711'} : {}}
+                      >{char}</span>
+                    );
+                  })
+                }
               </>
             );
           }}
@@ -154,4 +148,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeContainer;

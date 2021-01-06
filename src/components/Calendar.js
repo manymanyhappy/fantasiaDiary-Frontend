@@ -238,7 +238,6 @@ const Calendar = ({ list, setList, setD3data }) => {
 
                       let dateDiary = list.find(item => item.date === showingDate);
                       let dateColor = dateDiary !== undefined ? dateDiary.fantasia_diary_id.fantasia_level_color : '';
-                      // let sameMonth = showingMonthInHeader === currentMonth ? '' : 'different_month';
 
                       let todayYear = getYear(new Date());
                       let todayMonth = getMonth(new Date());
@@ -261,7 +260,6 @@ const Calendar = ({ list, setList, setD3data }) => {
                               }
                             });
                           }}
-                          // currentMonth가 index로 나와서 index + 1 을 해줘야 this month임
                         >
                           <span className='text'>{showingDate}</span>
                         </div>

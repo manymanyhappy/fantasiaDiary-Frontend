@@ -1,14 +1,12 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   line,
   select,
   axisRight,
   axisBottom,
-  scaleTime,
   scaleLinear,
-  curveCardinal,
-  style
+  curveCardinal
 } from 'd3';
 
 const D3Wrapper = styled.div`
@@ -28,7 +26,6 @@ const D3Wrapper = styled.div`
 `;
 
 const FantasiaD3Graph = ({ list }) => {
-  // const [ data, setData ] = useState([0.25, -0.3, 0.5, -0.5]);
   const data = list.map(item => item[0]);
   const D3Domain = list.map(item => item[2]);
 

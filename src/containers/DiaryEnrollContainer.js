@@ -11,7 +11,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { saveDiary } from '../utils/api';
 import { TOKEN } from '../constants/index';
 
-import Header from './Hearder';
+import Header from '../components/Hearder';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -126,18 +126,18 @@ const DiaryWrapper = styled.div`
   }
 `;
 
-const DiaryEditor = () => {
-  const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
+const DiaryEnorllContainer = () => {
   const [ isLoading, setIsLoading ] = useState(false);
-  const userData = useSelector(state => state.login.userData);
+  const [ editorState, setEditorState ] = useState(EditorState.createEmpty());
 
+  const userData = useSelector(state => state.login.userData);
   const history = useHistory();
 
   const currentYear = format(new Date(), 'yyyy');
   const currentMonth = format(new Date(), 'MM');
   const currentDate = format(new Date(), 'd');
 
-  const userToken = localStorage.getItem(TOKEN); // token을 넘기는 방식 바꾸기
+  const userToken = localStorage.getItem(TOKEN);
 
   let contentState = editorState.getCurrentContent();
   let originalDiaryText = convertToRaw(contentState);
@@ -163,8 +163,7 @@ const DiaryEditor = () => {
       userToken,
       history,
       setIsLoading
-      );
-
+    );
   };
 
   return (
@@ -193,28 +192,20 @@ const DiaryEditor = () => {
             {currentYear}년 {currentMonth}월 {currentDate}일 환상의 일기장
           </div>
           <Editor
-            // 에디터와 툴바 모두에 적용되는 클래스
             wrapperClassName='wrapper-class'
-            // 에디터 주변에 적용된 클래스
             editorClassName='editor'
-            // 툴바 주위에 적용된 클래스
             toolbarClassName='toolbar-class'
-            // 툴바 설정
             toolbar={{
-              // inDropdown: 해당 항목과 관련된 항목을 드롭다운으로 나타낼것인지
               list: { inDropdown: true },
               textAlign: { inDropdown: true },
               link: { inDropdown: true },
-              history: { inDropdown: false },
+              history: { inDropdown: false }
             }}
-            placeholder="내용을 작성해주세요."
-            // 한국어 설정
+            placeholder='내용을 작성해주세요.'
             localization={{
-              locale: 'ko',
+              locale: 'ko'
             }}
-            // 초기값 설정
             editorState={editorState}
-            // 에디터의 값이 변경될 때마다 onEditorStateChange 호출
             onEditorStateChange={onEditorStateChange}
           />
           <button
@@ -229,4 +220,4 @@ const DiaryEditor = () => {
   );
 };
 
-export default DiaryEditor;
+export default DiaryEnorllContainer;

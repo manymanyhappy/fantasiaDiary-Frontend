@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import store from './store';
-import AppContainer from '../src/containers/AppContainer/AppContainer';
+import AppContainer from '../src/containers/AppContainer';
 
 const GlobalStyle = createGlobalStyle`
   body {

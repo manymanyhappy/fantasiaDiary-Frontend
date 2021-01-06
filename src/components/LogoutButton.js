@@ -33,7 +33,7 @@ const LogoutButton = () => {
 
   return (
     <LogoutButtonWrapper onClick={onClickLogout}>
-        <GrLogout />
+      <GrLogout />
     </LogoutButtonWrapper>
   );
 };

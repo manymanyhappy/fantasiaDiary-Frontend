@@ -26,13 +26,7 @@ export const getLoggedInUserInfo = async (email, dispatch) => {
   }
 };
 
-export const saveDiary = async (
-  todayDiary,
-  originalDiaryText,
-  token,
-  history,
-  setIsLoading,
-  ) => {
+export const saveDiary = async (todayDiary, originalDiaryText, token, history, setIsLoading) => {
   try {
     const response = await axios.post('http://localhost:4000/myfantasia/new',
     {
