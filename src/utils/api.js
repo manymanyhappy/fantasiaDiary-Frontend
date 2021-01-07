@@ -12,7 +12,7 @@ const { REACT_APP_SERVER_URI } = process.env;
 
 export const getLoggedInUserInfo = async (email, dispatch) => {
   try {
-    const response = await axios.post(`${ROUTES.USER}${ROUTES.LOGIN}`,
+    const response = await axios.post(`${REACT_APP_SERVER_URI}${ROUTES.USER}${ROUTES.LOGIN}`,
     {
       email: email
     });
@@ -31,7 +31,7 @@ export const getLoggedInUserInfo = async (email, dispatch) => {
 
 export const saveDiary = async (todayDiary, originalDiaryText, token, history, setIsLoading) => {
   try {
-    const response = await axios.post(`${ROUTES.MYFANTASIA}${ROUTES.NEW}`,
+    const response = await axios.post(`${REACT_APP_SERVER_URI}${ROUTES.MYFANTASIA}${ROUTES.NEW}`,
     {
       data: todayDiary,
       fantasiaDiaryItem: originalDiaryText
@@ -58,7 +58,7 @@ export const saveDiary = async (todayDiary, originalDiaryText, token, history, s
 
 export const getThisMonthDiaryList = async (token, year, month) => {
   try {
-    const response = await axios.get(`${ROUTES.MYFANTASIA}`,
+    const response = await axios.get(`${REACT_APP_SERVER_URI}${ROUTES.MYFANTASIA}`,
     {
       params: {
         month: month + 1,
